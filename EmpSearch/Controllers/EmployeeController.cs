@@ -19,7 +19,7 @@ namespace EmpSearch.Controllers
         }
 
         [System.Web.Http.HttpGet()]
-        public IHttpActionResult GetSearch(string name)
+        public IHttpActionResult GetSearch(string search)
         {
 
             using (var ctx = new EmpContext())
@@ -27,10 +27,10 @@ namespace EmpSearch.Controllers
 
                 IQueryable<Employee> query = ctx.Employees;
 
-                if (!string.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(search))
                 {
-                    query = query.Where(e => e.EmpName.Contains(name)
-                            || e.EmpCode.Contains(name));
+                    query = query.Where(e => e.EmpName.Contains(search)
+                            || e.EmpCode.Contains(search));
                     
                     if(query.Count() <1)
                     {
